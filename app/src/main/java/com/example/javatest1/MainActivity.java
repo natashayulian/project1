@@ -76,8 +76,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         try{
-            Interpreter.Options opt = new Interpreter.Options();
-            tflite = new Interpreter(loadmodelfile(this), opt);
+            tflite = new Interpreter(loadmodelfile(this));
         }catch (Exception e) {
             e.printStackTrace();
         }
@@ -129,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private MappedByteBuffer loadmodelfile(Activity activity) throws IOException {
-        AssetFileDescriptor fileDescriptor=activity.getAssets().openFd("model.tflite");
+        AssetFileDescriptor fileDescriptor=activity.getAssets().openFd("vegs.tflite");
         FileInputStream inputStream=new FileInputStream(fileDescriptor.getFileDescriptor());
         FileChannel fileChannel=inputStream.getChannel();
         long startoffset = fileDescriptor.getStartOffset();
@@ -147,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
     private void showresult(){
 
         try{
-            labels = FileUtil.loadLabels(this,"label.txt");
+            labels = FileUtil.loadLabels(this,"vegs.txt");
         }catch (Exception e){
             e.printStackTrace();
         }
