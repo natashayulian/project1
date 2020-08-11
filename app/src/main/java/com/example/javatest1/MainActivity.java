@@ -76,7 +76,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         try{
-            tflite = new Interpreter(loadmodelfile(this));
+            Interpreter.Options opt = new Interpreter.Options();
+            tflite = new Interpreter(loadmodelfile(this) , opt);
         }catch (Exception e) {
             e.printStackTrace();
         }
